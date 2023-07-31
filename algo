@@ -1,0 +1,224 @@
+                                                  Algotutor
+
+
+1.Roman to Integer
+
+
+
+class Solution {
+    public int romanToInt(String s) {
+        int res=0,num=0;
+        for(int i=s.length()-1;i>=0;i--){
+            switch(s.charAt(i)){
+                case 'I':
+                    num=1;
+                    break;
+                case 'V':
+                    num=5;
+                    break;
+                case 'X':
+                    num=10;
+                    break;
+                case 'L':
+                    num=50;
+                    break;
+                case 'C':
+                    num=100;
+                    break;
+                case 'D':
+                    num=500;
+                    break;
+                case 'M':
+                    num=1000;
+                    break;         
+
+            }
+            if(4* num<res) res-=num;
+            else res+=num;
+        }
+        return res;
+
+        
+    }
+}
+
+
+
+
+
+2.Longest common prefix
+
+
+
+
+char * longestCommonPrefix(char ** strs, int strsSize){
+    for(int c=0;;c++){
+        if(strs[0][c]=='\0'){
+            return strs[0];
+        }
+        for(int s=1;s<strsSize;s++){
+            if(strs[s][c]!=strs[0][c]){
+                strs[0][c]='\0';
+                return strs[0];
+            }
+        }
+    }
+}
+
+
+
+
+
+3.valid palindrome
+
+
+
+
+class Solution {
+    public boolean isPalindrome(String s) {
+        if(s==null)
+          return false;
+        s=s.toLowerCase();
+        int l=0;
+        int r=s.length()-1;
+        while(l<r){
+            while(l<r && !((s.charAt(l)>='a' && s.charAt(l)<='z')||(s.charAt(l)>='0' && s.charAt(l)<='9'))){
+                l++;
+            }
+            while(l<r && !((s.charAt(r)>='a' && s.charAt(r)<='z')||(s.charAt(r)>='0' && s.charAt(r)<='9'))){
+                r--;
+            }
+            if(s.charAt(l)!=s.charAt(r)){
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+
+        
+    }
+}
+
+
+
+
+4.Valid Anagram
+
+
+
+
+class Solution(object):
+    def isAnagram(self, s, t):
+        if len(s)!=len(t):
+            return False
+        for id in set(s):
+            if s.count(id)!=t.count(id):
+                return False
+        return True
+        
+
+
+
+
+
+5.Reverse words in string
+
+
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return " ".join(s.split()[::-1])
+
+
+
+
+7. Longest Valid parenthesis
+
+
+
+
+class Solution {
+    public int longestValidParentheses(String s) {
+        Stack<Integer> a = new Stack<>();
+        a.push(-1);
+        int n = 0;
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s.charAt(i) == '(')
+                a.push(i);
+            else if(s.charAt(i) == ')')
+            {
+                a.pop();
+                if(a.empty())
+                    a.push(i);
+                else
+                    n = Math.max(n, i - a.peek());
+            }
+        }
+        return n;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8. Valid Number
+
+
+
+
+
+class Solution:
+    def isNumber(self, s: str) -> bool:
+        s = s.strip()
+        if not s: 
+            return False
+        
+        a = False
+        b = False
+        n = False
+        m = False
+        
+        for i, char in enumerate(s):
+            if char == '+' or char == '-':
+                if i > 0 and s[i - 1] != 'e' and s[i - 1] != 'E':
+                    return False
+                if i == len(s) - 1:
+                    return False
+            elif char.isdigit():
+                n = True
+                m = True
+            elif char == '.':
+                if a or b:
+                    return False
+                a = True
+                if i == len(s) - 1:
+                    return n
+            elif char == 'e' or char == 'E':
+                if b or not n:
+                    return False
+                b = True
+                m = False
+                if i == len(s) - 1:
+                    return False
+            else:
+                return False
+        return n and m
+
+
+
+
+
+
